@@ -67,32 +67,32 @@ nnoremap _hX :<C-U>silent %yank X<CR>
 nnoremap _hY :<C-U>silent %yank Y<CR>
 nnoremap _hZ :<C-U>silent %yank Z<CR>
 
-nnoremap _ga :<C-U>silent %d<CR>"aP
-nnoremap _gb :<C-U>silent %d<CR>"bP
-nnoremap _gc :<C-U>silent %d<CR>"cP
-nnoremap _gd :<C-U>silent %d<CR>"dP
-nnoremap _ge :<C-U>silent %d<CR>"eP
-nnoremap _gf :<C-U>silent %d<CR>"fP
-nnoremap _gg :<C-U>silent %d<CR>"gP
-nnoremap _gh :<C-U>silent %d<CR>"hP
-nnoremap _gi :<C-U>silent %d<CR>"iP
-nnoremap _gj :<C-U>silent %d<CR>"jP
-nnoremap _gk :<C-U>silent %d<CR>"kP
-nnoremap _gl :<C-U>silent %d<CR>"lP
-nnoremap _gm :<C-U>silent %d<CR>"mP
-nnoremap _gn :<C-U>silent %d<CR>"nP
-nnoremap _go :<C-U>silent %d<CR>"oP
-nnoremap _gp :<C-U>silent %d<CR>"pP
-nnoremap _gq :<C-U>silent %d<CR>"qP
-nnoremap _gr :<C-U>silent %d<CR>"rP
-nnoremap _gs :<C-U>silent %d<CR>"sP
-nnoremap _gt :<C-U>silent %d<CR>"tP
-nnoremap _gu :<C-U>silent %d<CR>"uP
-nnoremap _gv :<C-U>silent %d<CR>"vP
-nnoremap _gw :<C-U>silent %d<CR>"wP
-nnoremap _gx :<C-U>silent %d<CR>"xP
-nnoremap _gy :<C-U>silent %d<CR>"yP
-nnoremap _gz :<C-U>silent %d<CR>"zP
+nnoremap _ga :<C-U>silent %d _<CR>"aP
+nnoremap _gb :<C-U>silent %d _<CR>"bP
+nnoremap _gc :<C-U>silent %d _<CR>"cP
+nnoremap _gd :<C-U>silent %d _<CR>"dP
+nnoremap _ge :<C-U>silent %d _<CR>"eP
+nnoremap _gf :<C-U>silent %d _<CR>"fP
+nnoremap _gg :<C-U>silent %d _<CR>"gP
+nnoremap _gh :<C-U>silent %d _<CR>"hP
+nnoremap _gi :<C-U>silent %d _<CR>"iP
+nnoremap _gj :<C-U>silent %d _<CR>"jP
+nnoremap _gk :<C-U>silent %d _<CR>"kP
+nnoremap _gl :<C-U>silent %d _<CR>"lP
+nnoremap _gm :<C-U>silent %d _<CR>"mP
+nnoremap _gn :<C-U>silent %d _<CR>"nP
+nnoremap _go :<C-U>silent %d _<CR>"oP
+nnoremap _gp :<C-U>silent %d _<CR>"pP
+nnoremap _gq :<C-U>silent %d _<CR>"qP
+nnoremap _gr :<C-U>silent %d _<CR>"rP
+nnoremap _gs :<C-U>silent %d _<CR>"sP
+nnoremap _gt :<C-U>silent %d _<CR>"tP
+nnoremap _gu :<C-U>silent %d _<CR>"uP
+nnoremap _gv :<C-U>silent %d _<CR>"vP
+nnoremap _gw :<C-U>silent %d _<CR>"wP
+nnoremap _gx :<C-U>silent %d _<CR>"xP
+nnoremap _gy :<C-U>silent %d _<CR>"yP
+nnoremap _gz :<C-U>silent %d _<CR>"zP
 nnoremap _gA "aP
 nnoremap _gB "bP
 nnoremap _gC "cP
@@ -203,7 +203,7 @@ vnoremap _gz x"zP
 function! ReplaceRegisterNmap(name)
   let l:tmp = getreg(a:name)
   execute 'silent %yank '. a:name
-  silent %d
+  silent %d _
   let l:tmplist = split(l:tmp, '\n')
 
   let l:i = 0
@@ -211,19 +211,21 @@ function! ReplaceRegisterNmap(name)
       call append(line('$'), l:l)
       let l:i += 1
   endfor
+  1d _
 endfunction
-function! ReplaceRegisterVmap(name)
-  let l:tmp = getreg(a:name)
-  silent execute 'normal gv"'. a:name. 'y'
-  silent %d
-  let l:tmplist = split(l:tmp, '\n')
-
-  let l:i = 0
-  for l:l in l:tmplist
-      call append(l:i, l:l)
-      let l:i += 1
-  endfor
-endfunction
+"function! ReplaceRegisterVmap(name)
+"  let l:tmp = getreg(a:name)
+"  silent execute 'normal gv"'. a:name. 'y'
+"  silent %d _
+"  let l:tmplist = split(l:tmp, '\n')
+"
+"  let l:i = 0
+"  for l:l in l:tmplist
+"      call append(l:i, l:l)
+"      let l:i += 1
+"  endfor
+"  1d _
+"endfunction
 
 nnoremap _xa :<C-U>call ReplaceRegisterNmap('a')<CR>
 nnoremap _xb :<C-U>call ReplaceRegisterNmap('b')<CR>
@@ -253,37 +255,36 @@ nnoremap _xy :<C-U>call ReplaceRegisterNmap('y')<CR>
 nnoremap _xz :<C-U>call ReplaceRegisterNmap('z')<CR>
 nnoremap _x  <Esc>
 
-vnoremap _xa :call ReplaceRegisterVmap('a')<CR>
-vnoremap _xb :call ReplaceRegisterVmap('b')<CR>
-vnoremap _xc :call ReplaceRegisterVmap('c')<CR>
-vnoremap _xd :call ReplaceRegisterVmap('d')<CR>
-vnoremap _xe :call ReplaceRegisterVmap('e')<CR>
-vnoremap _xf :call ReplaceRegisterVmap('f')<CR>
-vnoremap _xg :call ReplaceRegisterVmap('g')<CR>
-vnoremap _xh :call ReplaceRegisterVmap('h')<CR>
-vnoremap _xi :call ReplaceRegisterVmap('i')<CR>
-vnoremap _xj :call ReplaceRegisterVmap('j')<CR>
-vnoremap _xk :call ReplaceRegisterVmap('k')<CR>
-vnoremap _xl :call ReplaceRegisterVmap('l')<CR>
-vnoremap _xm :call ReplaceRegisterVmap('m')<CR>
-vnoremap _xn :call ReplaceRegisterVmap('n')<CR>
-vnoremap _xo :call ReplaceRegisterVmap('o')<CR>
-vnoremap _xp :call ReplaceRegisterVmap('p')<CR>
-vnoremap _xq :call ReplaceRegisterVmap('q')<CR>
-vnoremap _xr :call ReplaceRegisterVmap('r')<CR>
-vnoremap _xs :call ReplaceRegisterVmap('s')<CR>
-vnoremap _xt :call ReplaceRegisterVmap('t')<CR>
-vnoremap _xu :call ReplaceRegisterVmap('u')<CR>
-vnoremap _xv :call ReplaceRegisterVmap('v')<CR>
-vnoremap _xw :call ReplaceRegisterVmap('w')<CR>
-vnoremap _xx :call ReplaceRegisterVmap('x')<CR>
-vnoremap _xy :call ReplaceRegisterVmap('y')<CR>
-vnoremap _xz :call ReplaceRegisterVmap('z')<CR>
-vnoremap _x  <Esc>gv
+"vnoremap _xa :call ReplaceRegisterVmap('a')<CR>
+"vnoremap _xb :call ReplaceRegisterVmap('b')<CR>
+"vnoremap _xc :call ReplaceRegisterVmap('c')<CR>
+"vnoremap _xd :call ReplaceRegisterVmap('d')<CR>
+"vnoremap _xe :call ReplaceRegisterVmap('e')<CR>
+"vnoremap _xf :call ReplaceRegisterVmap('f')<CR>
+"vnoremap _xg :call ReplaceRegisterVmap('g')<CR>
+"vnoremap _xh :call ReplaceRegisterVmap('h')<CR>
+"vnoremap _xi :call ReplaceRegisterVmap('i')<CR>
+"vnoremap _xj :call ReplaceRegisterVmap('j')<CR>
+"vnoremap _xk :call ReplaceRegisterVmap('k')<CR>
+"vnoremap _xl :call ReplaceRegisterVmap('l')<CR>
+"vnoremap _xm :call ReplaceRegisterVmap('m')<CR>
+"vnoremap _xn :call ReplaceRegisterVmap('n')<CR>
+"vnoremap _xo :call ReplaceRegisterVmap('o')<CR>
+"vnoremap _xp :call ReplaceRegisterVmap('p')<CR>
+"vnoremap _xq :call ReplaceRegisterVmap('q')<CR>
+"vnoremap _xr :call ReplaceRegisterVmap('r')<CR>
+"vnoremap _xs :call ReplaceRegisterVmap('s')<CR>
+"vnoremap _xt :call ReplaceRegisterVmap('t')<CR>
+"vnoremap _xu :call ReplaceRegisterVmap('u')<CR>
+"vnoremap _xv :call ReplaceRegisterVmap('v')<CR>
+"vnoremap _xw :call ReplaceRegisterVmap('w')<CR>
+"vnoremap _xx :call ReplaceRegisterVmap('x')<CR>
+"vnoremap _xy :call ReplaceRegisterVmap('y')<CR>
+"vnoremap _xz :call ReplaceRegisterVmap('z')<CR>
+"vnoremap _x  <Esc>gv
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
 finish
-
 
